@@ -5,20 +5,24 @@ var burger = require("../models/burger.js");
 
 // routes
 router.get("/", function (req, res) {
-  burger.selectAll(function (data) {
+  burger.selectAll(function (res) {
     var getBurger = {
       burgers: data
     };
+
     console.log(getBurger);
     res.render("index", getBurger);
+
   });
 });
 
 router.post("/", function (req, res) {
-  burger.create(["burger_name", "devoured"],
-    [req.body.burger_name, req.body.devoured], function (result) {
+  burger.insertOne(["burger_name", "eaten"],
+    [req.body.burger_name, req.body.eaten], function (result) {
 
-      res.json({ id: result.insertId, burger_name: result.insert });
+      res.json({
+        id: result.insertId, burger_name: result.insert
+      });
 
     });
 
@@ -27,8 +31,8 @@ router.post("/", function (req, res) {
 
     console.log("condition", condition);
 
-    burger.update({
-      devoured: req.body.devoured
+    burger.updateOne({
+      eaten: req.body.eaten
     }, condition, function () {
       res.redirect("/");
     });
@@ -43,5 +47,5 @@ router.post("/", function (req, res) {
   });
 }),
 
-  // Export routes for server.js to use.
+
   module.exports = router;
