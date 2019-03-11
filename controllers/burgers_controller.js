@@ -1,13 +1,12 @@
 var express = require("express");
 var router = express.Router();
 
-
 var burger = require("../models/burger.js");
 
 // routes
-router.get("/", function(req, res) {
-  burger.all(function(data) {
-    var getBurger= {
+router.get("/", function (req, res) {
+  burger.selectAll(function (data) {
+    var getBurger = {
       burgers: data
     };
     console.log(getBurger);
@@ -15,35 +14,33 @@ router.get("/", function(req, res) {
   });
 });
 
-router.post("/", function(req, res) {
-  burger.create([
-    "burger_name", "devoured"
-  ], [
-    req.body.burger_name, req.body.devoured
-  ], function() {
-    res.redirect("/");
+router.post("/", function (req, res) {
+  burger.create(["burger_name", "devoured"],
+    [req.body.burger_name, req.body.devoured], function (result) {
+
+      res.json({ id: result.insertId, burger_name: result.insert });
+
+    });
+
+  router.put("/:id", function (req, res) {
+    var condition = "id = " + req.params.id;
+
+    console.log("condition", condition);
+
+    burger.update({
+      devoured: req.body.devoured
+    }, condition, function () {
+      res.redirect("/");
+    });
   });
-});
 
-router.put("/:id", function(req, res) {
-  var condition = "id = " + req.params.id;
+  router.delete("/:id", function (req, res) {
+    var condition = "id = " + req.params.id;
 
-  console.log("condition", condition);
-
-  burger.update({
-    devoured: req.body.devoured
-  }, condition, function() {
-    res.redirect("/");
+    burger.delete(condition, function () {
+      res.redirect("/");
+    });
   });
-});
 
-router.delete("/:id", function(req, res) {
-  var condition = "id = " + req.params.id;
-
-  burger.delete(condition, function() {
-    res.redirect("/");
-  });
-});
-
-// Export routes for server.js to use.
-module.exports = router;
+  // Export routes for server.js to use.
+  module.exports = router;

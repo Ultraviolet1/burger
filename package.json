@@ -1,5 +1,5 @@
 {
-  "name": "burger",
+  "name": "burger_db",
   "version": "1.0.0",
   "description": "App using Node.js, Express, and Handlebars",
   "main": "index.js",
