@@ -1,4 +1,3 @@
-// Import MySQL connection.
 var connection = require("../config/connection.js");
 
 // Helper function for SQL syntax.
@@ -13,12 +12,17 @@ function printQuestionMarks(num) {
 }
 
 // SQL syntax.
-function makeString(ob) {
+function OgjToSql(ob) {
   var arr = [];
 
   for (var key in ob) {
     if (Object.hasOwnProperty.call(ob, key)) {
+
+      if (typeof value === "string" && value.indexOf(" ") >= 0) {
+        value = "'" + value + "'";
+      }
       arr.push(key + "=" + ob[key]);
+
     }
   }
 
@@ -26,7 +30,7 @@ function makeString(ob) {
 }
 
 // Object for all our SQL statement functions.
-var orm = {
+const orm = {
   all: function(tableInput, cb) {
     var queryString = "SELECT * FROM " + tableInput + ";";
     connection.query(queryString, function(err, result) {

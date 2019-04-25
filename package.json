@@ -2,7 +2,7 @@
   "name": "burger_db",
   "version": "1.0.0",
   "description": "App using Node.js, Express, and Handlebars",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -11,16 +11,17 @@
     "type": "git",
     "url": "git+https://github.com/Ultraviolet1/burger.git"
   },
-  "author": "",
+  "author": "Tierra C",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Ultraviolet1/burger/issues"
   },
   "homepage": "https://github.com/Ultraviolet1/burger#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
-    "mysql": "^2.16.0"
+    "mysql": "github:mysqljs/mysql"
   },
   "devDependencies": {}
 }

@@ -1,12 +1,6 @@
 // Set up MySQL connection.
 var mysql = require("mysql");
 
-var connection;
-
-if (process.env.PORT) {
-  connection = mysql.createConnection(process.env.PORT);
-} else {
-
 var connection = mysql.createConnection({
   port: 3306,
   host: "localhost",
@@ -23,7 +17,5 @@ connection.connect(function(err) {
   }
   console.log("App now connected");
 });
-
-};
 // Export connection for our ORM to use.
 module.exports = connection 
