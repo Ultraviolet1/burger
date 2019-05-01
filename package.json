@@ -1,5 +1,5 @@
 {
-  "name": "burger_db",
+  "name": "mysql-sequelize-heroku",
   "version": "1.0.0",
   "description": "App using Node.js, Express, and Handlebars",
   "main": "server.js",
