@@ -6,7 +6,7 @@ if (process.env.JAWSDB_URL) {
 } else {
   
 
-var connection = mysql.createConnection({
+ connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "403700!Qq",
@@ -15,12 +15,7 @@ var connection = mysql.createConnection({
 };
 
 // Make connection.
-connection.connect(function(err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
-  console.log("App now connected");
-});
+connection.connect();
+  
 // Export connection for our ORM to use.
 module.exports = connection 
